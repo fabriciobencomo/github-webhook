@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import { envs } from "../../config/envs";
 
 export class DiscordService {
@@ -6,7 +7,12 @@ export class DiscordService {
 
   async notify(message: string){
     const body = {
-      content: message
+      content: message,
+      embeds: [
+        {
+          image: {url: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWlrMWJnaDd0d2VoZXRuZDV0OTFpbDE1MDIweTZ5YXViazJ2MGp0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/du3J3cXyzhj75IOgvA/giphy.gif"}
+        }
+      ]
     }
 
     const resp = await fetch(this.discordWebhookUrl, {
