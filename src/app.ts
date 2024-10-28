@@ -1,5 +1,7 @@
 import express from 'express'
 import { envs } from './config/envs'
+import { GithubController } from './presentation/github/controller'
+import exp from 'constants'
 
 (() => {
   main()
@@ -8,9 +10,12 @@ import { envs } from './config/envs'
 function main() {
   const app = express()
 
-  app.post('/api/github', (req,res) => {
-    res.json('github endpoint')
-  })
+  const controller = new GithubController()
+
+  app.use(express.json())
+
+
+  app.post('/api/github', controller.webhookHandler)
 
   app.listen(envs.PORT, () => {
     console.log(`App Running Port ${envs.PORT}`)
